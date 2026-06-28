@@ -14,26 +14,6 @@
               <i class="ti ti-menu-2"></i>
             </a>
           </li>
-          <li class="dropdown pc-h-item d-inline-flex d-md-none">
-            <a class="pc-head-link dropdown-toggle arrow-none m-0" data-bs-toggle="dropdown" href="#" role="button"
-              aria-haspopup="false" aria-expanded="false">
-              <i class="ti ti-search"></i>
-            </a>
-            <div class="dropdown-menu pc-h-dropdown drp-search">
-              <form class="px-3">
-                <div class="form-group mb-0 d-flex align-items-center">
-                  <i data-feather="search"></i>
-                  <input type="search" class="form-control border-0 shadow-none" placeholder="Search here. . .">
-                </div>
-              </form>
-            </div>
-          </li>
-          <li class="pc-h-item d-none d-md-inline-flex">
-            <form class="header-search">
-              <i data-feather="search" class="icon-search"></i>
-              <input type="search" class="form-control" placeholder="Search here. . .">
-            </form>
-          </li>
         </ul>
       </div>
       <!-- [Mobile Media Block end] -->
@@ -56,7 +36,7 @@
                   <a class="list-group-item list-group-item-action">
                     <div class="d-flex">
                       <div class="flex-shrink-0">
-                        <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar">
+                        <img src="{{ asset('assets/images/profile.png') }}" alt="user-image" class="user-avtar">
                       </div>
                       <div class="flex-grow-1 ms-1">
                         <span class="float-end text-muted">3:00 AM</span>
@@ -68,7 +48,7 @@
                   <a class="list-group-item list-group-item-action">
                     <div class="d-flex">
                       <div class="flex-shrink-0">
-                        <img src="../assets/images/user/avatar-1.jpg" alt="user-image" class="user-avtar">
+                        <img src="{{ asset('assets/images/profile.png') }}" alt="user-image" class="user-avtar">
                       </div>
                       <div class="flex-grow-1 ms-1">
                         <span class="float-end text-muted">6:00 PM</span>
@@ -80,7 +60,7 @@
                   <a class="list-group-item list-group-item-action">
                     <div class="d-flex">
                       <div class="flex-shrink-0">
-                        <img src="../assets/images/user/avatar-3.jpg" alt="user-image" class="user-avtar">
+                        <img src="{{ asset('assets/images/profile.png') }}" alt="user-image" class="user-avtar">
                       </div>
                       <div class="flex-grow-1 ms-1">
                         <span class="float-end text-muted">2:45 PM</span>
@@ -92,7 +72,7 @@
                   <a class="list-group-item list-group-item-action">
                     <div class="d-flex">
                       <div class="flex-shrink-0">
-                        <img src="../assets/images/user/avatar-4.jpg" alt="user-image" class="user-avtar">
+                        <img src="{{ asset('assets/images/profile.png') }}" alt="user-image" class="user-avtar">
                       </div>
                       <div class="flex-grow-1 ms-1">
                         <span class="float-end text-muted">9:10 PM</span>
@@ -112,14 +92,14 @@
           <li class="dropdown pc-h-item header-user-profile">
             <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button"
               aria-haspopup="false" data-bs-auto-close="outside" aria-expanded="false">
-              <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar">
+              <img src="{{ asset('assets/images/profile.png') }}" alt="user-image" class="user-avtar">
               <span>Stebin Ben</span>
             </a>
             <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
               <div class="dropdown-header">
                 <div class="d-flex mb-1">
                   <div class="flex-shrink-0">
-                    <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar wid-35">
+                    <img src="{{ asset('assets/images/profile.png') }}" alt="user-image" class="user-avtar wid-35">
                   </div>
                   <div class="flex-grow-1 ms-3">
                     <h6 class="mb-1">Stebin Ben</h6>
