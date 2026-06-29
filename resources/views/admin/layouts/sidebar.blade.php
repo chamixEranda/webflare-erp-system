@@ -4,12 +4,12 @@
       <div class="m-header">
         <a href="{{ route('admin.dashboard') }}" class="b-brand text-primary">
           <!-- ========   Change your logo from here   ============ -->
-          <img src="../assets/images/logo-dark.svg" class="img-fluid logo-lg" alt="logo">
+          <img src="{{ asset('assets/images/logo-dark.svg') }}" class="img-fluid logo-lg" alt="logo">
         </a>
       </div>
       <div class="navbar-content">
         <ul class="pc-navbar">
-          <li class="pc-item">
+          <li class="pc-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
             <a href="{{ route('admin.dashboard') }}" class="pc-link">
               <span class="pc-micon"><i class="ti ti-dashboard"></i></span>
               <span class="pc-mtext">Dashboard</span>
@@ -38,6 +38,29 @@
               <span class="pc-mtext">Icons</span>
             </a>
           </li>
+
+          @if(auth()->user()->can('view users') || auth()->user()->can('view roles'))
+            <li class="pc-item pc-caption">
+              <label>User Management</label>
+              <i class="ti ti-users"></i>
+            </li>
+            @can('view users')
+              <li class="pc-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.users.index') }}" class="pc-link">
+                  <span class="pc-micon"><i class="ti ti-user"></i></span>
+                  <span class="pc-mtext">Users</span>
+                </a>
+              </li>
+            @endcan
+            @can('view roles')
+              <li class="pc-item {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.roles.index') }}" class="pc-link">
+                  <span class="pc-micon"><i class="ti ti-settings"></i></span>
+                  <span class="pc-mtext">Roles & Permissions</span>
+                </a>
+              </li>
+            @endcan
+          @endif
 
           <li class="pc-item pc-caption">
             <label>Pages</label>
