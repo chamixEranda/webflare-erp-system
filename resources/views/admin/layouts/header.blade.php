@@ -14,11 +14,37 @@
               <i class="ti ti-menu-2"></i>
             </a>
           </li>
+          
         </ul>
       </div>
       <!-- [Mobile Media Block end] -->
       <div class="ms-auto">
         <ul class="list-unstyled">
+          <li class="pc-h-item d-none d-md-inline-flex">
+            <div class="dropdown">
+              <a class="pc-head-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                <i class="ti ti-plus"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end">
+                <a href="#!" class="dropdown-item">
+                  <i class="ti ti-package"></i>
+                  <span>Add Products</span>
+                </a>
+                <a href="#!" class="dropdown-item">
+                  <i class="ti ti-shopping-cart"></i>
+                  <span>Add Purchase Order</span>
+                </a>
+                <a href="#!" class="dropdown-item">
+                  <i class="ti ti-receipt"></i>
+                  <span>Add Sale</span>
+                </a>
+                <a href="#!" class="dropdown-item">
+                  <i class="ti ti-user-check"></i>
+                  <span>Add Supplier</span>
+                </a>
+              </div>
+            </div>
+          </li>
           <li class="dropdown pc-h-item">
             <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button"
               aria-haspopup="false" aria-expanded="false">
