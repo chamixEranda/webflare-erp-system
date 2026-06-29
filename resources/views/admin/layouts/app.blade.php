@@ -29,6 +29,7 @@
   <!-- [Template CSS Files] -->
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" id="main-style-link">
   <link rel="stylesheet" href="{{ asset('assets/css/style-preset.css') }}">
+  @stack('styles')
 
 </head>
 <!-- [Head] end -->
@@ -38,6 +39,7 @@
     @include('admin.layouts.header')
     @yield('content')
     @include('admin.layouts.footer')
+    @stack('scripts')
 </body>
 
 </html>
