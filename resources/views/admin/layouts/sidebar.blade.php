@@ -4,12 +4,12 @@
       <div class="m-header">
         <a href="{{ route('admin.dashboard') }}" class="b-brand text-primary">
           <!-- ========   Change your logo from here   ============ -->
-          <img src="../assets/images/logo-dark.svg" class="img-fluid logo-lg" alt="logo">
+          <img src="{{ asset('assets/images/logo-dark.svg') }}" class="img-fluid logo-lg" alt="logo">
         </a>
       </div>
       <div class="navbar-content">
         <ul class="pc-navbar">
-          <li class="pc-item">
+          <li class="pc-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
             <a href="{{ route('admin.dashboard') }}" class="pc-link">
               <span class="pc-micon"><i class="ti ti-dashboard"></i></span>
               <span class="pc-mtext">Dashboard</span>
