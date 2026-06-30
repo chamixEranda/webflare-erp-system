@@ -1,0 +1,184 @@
+/* ── Table custom styles ───────────────────────── */
+.table {
+    border-bottom: 1px solid #e2e8f0 !important;
+}
+.table thead th,
+table.dataTable thead th {
+    font-size: 0.73rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #6c757d !important;
+    font-weight: 600;
+    border-bottom: 2px solid #f0f2f5 !important;
+    padding: 12px 16px !important;
+    white-space: nowrap;
+    background-color: transparent !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+}
+.table tbody td,
+table.dataTable tbody td {
+    padding: 14px 16px !important;
+    border-bottom: 1px solid #f6f8fa !important;
+    vertical-align: middle;
+    background-color: transparent !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+}
+.table tbody tr:last-child td,
+table.dataTable tbody tr:last-child td {
+    border-bottom: none !important;
+}
+.table tbody tr:hover,
+table.dataTable tbody tr:hover {
+    background-color: #f9fafb !important;
+}
+table.dataTable {
+    border-collapse: collapse !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+/* Ensure DataTable row striping is removed */
+table.dataTable.table-striped > tbody > tr:nth-of-type(odd) > * {
+    box-shadow: none !important;
+    background-color: transparent !important;
+}
+/* Reset box shadows and border styling on bootstrap dataTables */
+table.dataTable.no-footer {
+    border-bottom: none !important;
+}
+.btn-icon {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: filter 0.15s ease, transform 0.1s ease;
+}
+.btn-icon:hover {
+    filter: brightness(0.9);
+    transform: scale(1.07);
+}
+
+/* ── DataTable controls (simple-datatables & jQuery dataTables) ────────────────────────── */
+.datatable-top,
+.dt-buttons,
+.dataTables_filter {
+    display: none !important;
+}
+
+.datatable-bottom,
+.custom-pagination-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    border-top: 1px solid #e2e8f0 !important;
+    padding-top: 16px !important;
+    margin-top: 12px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.custom-pagination-row > div {
+    width: auto !important;
+    flex: 0 0 auto !important;
+    max-width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    height: 32px !important;
+}
+.datatable-info,
+.dataTables_info {
+    font-size: 0.82rem;
+    color: #6c757d;
+    padding: 0 !important;
+    margin: 0 !important;
+    height: 32px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+}
+.dataTables_wrapper .dataTables_paginate {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    height: 32px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.datatable-pagination ul,
+.dataTables_wrapper .dataTables_paginate .pagination {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 4px !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+.datatable-pagination li a,
+.dataTables_wrapper .dataTables_paginate .page-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 32px !important;
+    height: 32px !important;
+    padding: 0 10px !important;
+    border-radius: 8px !important;
+    font-size: 0.83rem !important;
+    color: #495057 !important;
+    border: 1.5px solid #e2e8f0 !important;
+    background: #fff !important;
+    text-decoration: none !important;
+    transition: all 0.15s !important;
+}
+.datatable-pagination li a:hover,
+.dataTables_wrapper .dataTables_paginate .page-item:hover:not(.disabled) .page-link {
+    background: var(--bs-primary) !important;
+    color: #fff !important;
+    border-color: var(--bs-primary) !important;
+}
+.datatable-pagination .datatable-active a,
+.dataTables_wrapper .dataTables_paginate .page-item.active .page-link {
+    background: var(--bs-primary) !important;
+    color: #fff !important;
+    border-color: var(--bs-primary) !important;
+    font-weight: 600 !important;
+}
+.datatable-pagination .datatable-disabled a,
+.dataTables_wrapper .dataTables_paginate .page-item.disabled .page-link {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* ── Modal polish ──────────────────────────────── */
+.modal-content {
+    border-radius: 16px;
+}
+.input-group-text {
+    border-color: #dee2e6;
+}
+.input-group .form-control,
+.input-group .form-select {
+    border-left: none;
+}
+.input-group .form-control:focus,
+.input-group .form-select:focus {
+    border-color: #dee2e6;
+    box-shadow: none;
+}
+.input-group:focus-within .input-group-text {
+    border-color: var(--bs-primary);
+}
+.input-group:focus-within .form-control,
+.input-group:focus-within .form-select {
+    border-color: var(--bs-primary);
+    box-shadow: none;
+}

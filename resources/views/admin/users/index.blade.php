@@ -39,31 +39,71 @@
         {{-- Stats Row --}}
 
 
-        {{-- Main Table Card --}}
-        <div class="card border-0 shadow-sm">
-            <div class="card-header border-0 bg-transparent py-3 px-4">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+        {{-- Header Card --}}
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-body py-3.5 px-4">
+                {{-- Row 1: Title and Add User --}}
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
                     <div>
-                        <h5 class="mb-1 fw-semibold d-flex align-items-center gap-2">
+                        <h5 class="mb-0 fw-semibold d-flex align-items-center gap-2">
                             <span class="d-inline-flex align-items-center justify-content-center bg-primary rounded-2 text-white" style="width:30px; height:30px;">
                                 <i class="ti ti-users" style="font-size:1rem;"></i>
                             </span>
                             All Users
                         </h5>
                     </div>
+
                     @can('add users')
                         <button type="button"
                             class="btn btn-primary d-flex align-items-center gap-1 px-3"
                             data-bs-toggle="modal"
-                            data-bs-target="#addUserModal">
+                            data-bs-target="#addUserModal"
+                            style="height: 38px; border-radius: 8px; font-size: 0.85rem;">
                             <i class="ti ti-user-plus"></i>
                             <span>Add User</span>
                         </button>
                     @endcan
                 </div>
             </div>
+        </div>
 
-            <div class="card-body px-4 pt-0">
+        {{-- Main Table Card --}}
+        <div class="card border-0 shadow-sm">
+            <div class="card-header border-0 bg-transparent py-3 px-4 pb-0">
+                {{-- Row 2: Inline controls --}}
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                    {{-- Left side: perPage selector --}}
+                    <div class="d-flex align-items-center gap-2" style="width: 150px;">
+                        <select id="userTablePerPage" class="form-select form-select-sm" style="width: 75px; border-radius: 8px; border: 1.5px solid #e2e8f0; font-size: 0.85rem; height: 38px; outline: none; background-color: #fff;">
+                            <option value="5">5</option>
+                            <option value="10" selected>10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
+
+                    {{-- Centered Search Box --}}
+                    <div class="position-relative mx-auto" style="width: 100%; max-width: 320px;">
+                        <input type="text" id="userTableSearch" class="form-control" placeholder="Search users..." style="border: 1.5px solid #e2e8f0; border-radius: 8px; padding: 7px 14px 7px 36px; font-size: 0.85rem; outline: none; transition: border-color 0.2s; height: 38px; width: 100%;">
+                        <i class="ti ti-search position-absolute top-50 translate-middle-y text-muted" style="left: 14px; font-size: 0.95rem;"></i>
+                    </div>
+
+                    {{-- Export Options (Three inline buttons showing icons) --}}
+                    <div class="d-flex align-items-center gap-2 ms-auto ms-md-0" style="width: 150px; justify-content: flex-end;">
+                        <button type="button" class="btn btn-light btn-icon border" id="exportCsvBtn" title="Export CSV" style="width: 38px; height: 38px; border-radius: 8px; background: #fff; color: #2e7d32; border-color: #e2e8f0 !important;">
+                            <i class="ti ti-file-text" style="font-size: 1.2rem;"></i>
+                        </button>
+                        <button type="button" class="btn btn-light btn-icon border" id="exportExcelBtn" title="Export Excel" style="width: 38px; height: 38px; border-radius: 8px; background: #fff; color: #1565c0; border-color: #e2e8f0 !important;">
+                            <i class="ti ti-file-analytics" style="font-size: 1.2rem;"></i>
+                        </button>
+                        <button type="button" class="btn btn-light btn-icon border" id="exportPdfBtn" title="Export PDF" style="width: 38px; height: 38px; border-radius: 8px; background: #fff; color: #c62828; border-color: #e2e8f0 !important;">
+                            <i class="ti ti-file-report" style="font-size: 1.2rem;"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body px-4 pt-3">
                 <div class="table-responsive" id="users-table-wrapper">
                     <table id="usersTable" class="table mb-0">
                         <thead>
@@ -329,152 +369,7 @@
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('assets/css/plugins/style.css') }}">
-<style>
-    /* ── Table custom styles ───────────────────────── */
-    #usersTable thead th {
-        font-size: 0.73rem;
-        text-transform: uppercase;
-        letter-spacing: 0.07em;
-        color: #6c757d;
-        font-weight: 600;
-        border-bottom: 2px solid #f0f2f5;
-        padding: 12px 16px;
-        white-space: nowrap;
-    }
-    #usersTable tbody td {
-        padding: 14px 16px;
-        border-bottom: 1px solid #f6f8fa;
-        vertical-align: middle;
-    }
-    #usersTable tbody tr:last-child td {
-        border-bottom: none;
-    }
-    #usersTable tbody tr.user-row {
-        transition: background 0.15s ease;
-    }
-    #usersTable tbody tr.user-row:hover {
-        background-color: #f9fafb;
-    }
-    .btn-icon {
-        width: 32px;
-        height: 32px;
-        padding: 0;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        transition: filter 0.15s ease, transform 0.1s ease;
-    }
-    .btn-icon:hover {
-        filter: brightness(0.9);
-        transform: scale(1.07);
-    }
-    /* ── DataTable controls ────────────────────────── */
-    .datatable-top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 8px 4px 16px;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-    .datatable-search input {
-        border: 1.5px solid #e2e8f0;
-        border-radius: 8px;
-        padding: 6px 14px 6px 36px;
-        font-size: 0.85rem;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236c757d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: 10px center;
-        width: 220px;
-        transition: border-color 0.2s;
-        outline: none;
-    }
-    .datatable-search input:focus {
-        border-color: var(--bs-primary);
-        box-shadow: 0 0 0 3px rgba(var(--bs-primary-rgb), 0.12);
-    }
-    .datatable-selector {
-        border: 1.5px solid #e2e8f0;
-        border-radius: 8px;
-        padding: 6px 10px;
-        font-size: 0.85rem;
-        color: #495057;
-        background: #fff;
-    }
-    .datatable-bottom {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 14px 4px 4px;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-    .datatable-info {
-        font-size: 0.82rem;
-        color: #6c757d;
-    }
-    .datatable-pagination ul {
-        display: flex;
-        gap: 4px;
-        align-items: center;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-    }
-    .datatable-pagination li a {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 32px;
-        height: 32px;
-        padding: 0 8px;
-        border-radius: 8px;
-        font-size: 0.83rem;
-        color: #495057;
-        border: 1.5px solid #e2e8f0;
-        text-decoration: none;
-        transition: all 0.15s;
-    }
-    .datatable-pagination li a:hover {
-        background: var(--bs-primary);
-        color: #fff;
-        border-color: var(--bs-primary);
-    }
-    .datatable-pagination .datatable-active a {
-        background: var(--bs-primary);
-        color: #fff;
-        border-color: var(--bs-primary);
-        font-weight: 600;
-    }
-    .datatable-pagination .datatable-disabled a {
-        opacity: 0.4;
-        pointer-events: none;
-    }
-    /* ── Modal polish ──────────────────────────────── */
-    .modal-content {
-        border-radius: 16px;
-    }
-    .input-group-text {
-        border-color: #dee2e6;
-    }
-    .input-group .form-control,
-    .input-group .form-select {
-        border-left: none;
-    }
-    .input-group .form-control:focus,
-    .input-group .form-select:focus {
-        border-color: #dee2e6;
-        box-shadow: none;
-    }
-    .input-group:focus-within .input-group-text {
-        border-color: var(--bs-primary);
-    }
-    .input-group:focus-within .form-control,
-    .input-group:focus-within .form-select {
-        border-color: var(--bs-primary);
-        box-shadow: none;
-    }
-</style>
+<link rel="stylesheet" href="{{ asset('assets/css/admin/custom-datatable.css') }}?v={{ time() }}">
 @endpush
 
 @push('scripts')
@@ -484,22 +379,129 @@
         // ── DataTable ──────────────────────────────────────────
         const tableEl = document.getElementById('usersTable');
         if (tableEl) {
-            new simpleDatatables.DataTable(tableEl, {
-                searchable: true,
+            const dataTable = new simpleDatatables.DataTable(tableEl, {
+                searchable: false,
                 fixedHeight: false,
                 perPage: 10,
-                perPageSelect: [5, 10, 25, 50],
+                perPageSelect: false, // Disable simple-datatables built-in per page select to use our custom inline select
                 columns: [
                     { select: 0, sortable: false },  // # column
                     { select: 5, sortable: false },  // Actions column
                 ],
                 labels: {
-                    placeholder: "Search users...",
                     noRows: "No users found",
-                    info: "Showing {start}–{end} of {rows} users",
-                    perPage: ""
+                    info: "Showing {start}–{end} of {rows} users"
                 }
             });
+
+            // Inline search integration
+            const searchInput = document.getElementById('userTableSearch');
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    dataTable.search(searchInput.value);
+                });
+            }
+
+            // Custom Per Page select integration
+            const perPageSelect = document.getElementById('userTablePerPage');
+            if (perPageSelect) {
+                perPageSelect.addEventListener('change', function() {
+                    dataTable.options.perPage = parseInt(perPageSelect.value, 10);
+                    dataTable.update();
+                });
+            }
+
+            // Export CSV integration
+            const exportCsvBtn = document.getElementById('exportCsvBtn');
+            if (exportCsvBtn) {
+                exportCsvBtn.addEventListener('click', function() {
+                    simpleDatatables.exportCSV(dataTable, {
+                        download: true,
+                        skipColumn: [0, 5],
+                        filename: 'users_export_' + new Date().toISOString().slice(0, 10)
+                    });
+                });
+            }
+
+            // Export Excel integration
+            const exportExcelBtn = document.getElementById('exportExcelBtn');
+            if (exportExcelBtn) {
+                exportExcelBtn.addEventListener('click', function() {
+                    // Extract active headings and rows (skipping sequence # and actions columns)
+                    const headings = dataTable.data.headings.filter((h, idx) => idx !== 0 && idx !== 5).map(h => h.text ?? h.data);
+                    const rows = dataTable.data.data.map(row => row.filter((cell, idx) => idx !== 0 && idx !== 5).map(cell => cell.text ?? cell.data));
+
+                    // Generate Excel HTML XML format (escaped tags to prevent early script closing or parser breaks)
+                    let html = '<' + 'html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">';
+                    html += '<' + 'head><!--[if gte mso 9]><xml><x' + ':ExcelWorkbook><x' + ':ExcelWorksheets><x' + ':ExcelWorksheet><x' + ':Name>Users</x' + ':Name><x' + ':WorksheetOptions><x' + ':DisplayGridlines/></x' + ':WorksheetOptions></x' + ':ExcelWorksheet></x' + ':ExcelWorksheets></x' + ':ExcelWorkbook></xml><![endif]--><meta charset="UTF-8"><' + '/head>';
+                    html += '<' + 'body><' + 'table border="1">';
+                    html += '<' + 'thead><' + 'tr style="background-color: #5c6bc0; color: #ffffff; font-weight: bold;">';
+                    headings.forEach(h => {
+                        html += '<' + 'th>' + h + '<' + '/th>';
+                    });
+                    html += '<' + '/tr><' + '/thead><' + 'tbody>';
+                    rows.forEach(row => {
+                        html += '<' + 'tr>';
+                        row.forEach(cell => {
+                            html += '<' + 'td>' + cell + '<' + '/td>';
+                        });
+                        html += '<' + '/tr>';
+                    });
+                    html += '<' + '/tbody><' + '/table><' + '/body><' + '/html>';
+
+                    const blob = new Blob([html], { type: 'application/vnd.ms-excel;charset=utf-8' });
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'users_export_' + new Date().toISOString().slice(0, 10) + '.xls';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                });
+            }
+
+            // Export PDF integration
+            const exportPdfBtn = document.getElementById('exportPdfBtn');
+            if (exportPdfBtn) {
+                exportPdfBtn.addEventListener('click', function() {
+                    const headings = dataTable.data.headings.filter((h, idx) => idx !== 0 && idx !== 5).map(h => h.text ?? h.data);
+                    const rows = dataTable.data.data.map(row => row.filter((cell, idx) => idx !== 0 && idx !== 5).map(cell => cell.text ?? cell.data));
+
+                    const printWindow = window.open('', '_blank');
+                    printWindow.document.write('<' + 'html><' + 'head><' + 'title>Users Export<' + '/title>');
+                    printWindow.document.write('<' + 'style>');
+                    printWindow.document.write('body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; padding: 30px; color: #333; }');
+                    printWindow.document.write('h2 { color: #5c6bc0; font-weight: 600; margin-bottom: 20px; font-size: 24px; }');
+                    printWindow.document.write('table { width: 100%; border-collapse: collapse; margin-top: 10px; }');
+                    printWindow.document.write('th, td { border: 1px solid #e2e8f0; padding: 12px; text-align: left; font-size: 13px; }');
+                    printWindow.document.write('th { background-color: #f8fafc; font-weight: 600; color: #475569; }');
+                    printWindow.document.write('tr:nth-child(even) { background-color: #f8fafc; }');
+                    printWindow.document.write('<' + '/style><' + '/head><' + 'body>');
+                    printWindow.document.write('<h2>Users List</h2>');
+                    printWindow.document.write('<' + 'table><' + 'thead><' + 'tr>');
+                    headings.forEach(h => {
+                        printWindow.document.write('<' + 'th>' + h + '<' + '/th>');
+                    });
+                    printWindow.document.write('<' + '/tr><' + '/thead><' + 'tbody>');
+                    rows.forEach(row => {
+                        printWindow.document.write('<' + 'tr>');
+                        row.forEach(cell => {
+                            printWindow.document.write('<' + 'td>' + cell + '<' + '/td>');
+                        });
+                        printWindow.document.write('<' + '/tr>');
+                    });
+                    printWindow.document.write('<' + '/tbody><' + '/table>');
+                    printWindow.document.write('<' + '/body><' + '/html>');
+                    printWindow.document.close();
+                    
+                    // Trigger print dialog
+                    setTimeout(() => {
+                        printWindow.print();
+                        printWindow.close();
+                    }, 250);
+                });
+            }
         }
 
         // ── Delete confirmation ────────────────────────────────
