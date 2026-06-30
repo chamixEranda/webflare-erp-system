@@ -22,7 +22,8 @@
   <!-- [Bootstrap Icons] https://icons.getbootstrap.com/ -->
   <link rel="stylesheet" href="{{ asset('assets/css/plugins/dataTables.bootstrap5.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/plugins/buttons.bootstrap5.min.css') }}">
-
+  <!-- Swal2 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.25/dist/sweetalert2.min.css">
   <!-- Slim Select -->
   <script src="https://cdn.jsdelivr.net/npm/slim-select@latest/dist/slimselect.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/slim-select@latest/dist/slimselect.css" rel="stylesheet">
@@ -52,6 +53,7 @@
 
   <script src="{{ asset('assets/js/plugins/apexcharts.min.js') }}"></script>
   <script src="{{ asset('assets/js/pages/dashboard-default.js') }}"></script>
+  <script src="{{ asset('assets/js/admin/helper.js') }}"></script>
   <!-- Required Js -->
   <script src="{{ asset('assets/js/plugins/popper.min.js') }}"></script>
   <script src="{{ asset('assets/js/plugins/simplebar.min.js') }}"></script>
@@ -72,7 +74,7 @@
   <script src="{{ asset('assets/js/plugins/buttons.bootstrap5.min.js') }}"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.25/dist/sweetalert2.all.min.js"></script>
 
   <script>layout_change('light');</script>
 

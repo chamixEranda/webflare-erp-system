@@ -64,7 +64,14 @@ class UnitController extends Controller
             $nestedData['base_unit_id'] = $unit->baseUnit ? $unit->baseUnit->name : 'N/A';
             $nestedData['conversion_factor'] = $unit->conversion_factor;
             $nestedData['action'] = '<button type="button" class="btn btn-sm btn-primary" onclick="editUnit('.$unit->id.')">Edit</button>
-                                    <button type="button" class="btn btn-sm btn-danger" onclick="deleteUnit('.$unit->id.')">Delete</button>';
+                                    <button class="btn btn-sm btn-danger" type="button" onclick="form_alert(\'unit-' . $unit->id . '\',\'Want to delete this unit ?\')" title="Delete Unit"><i class="tio-delete-outlined"></i>
+                                        Delete
+                                    </button>
+                                    <form action="' . route('admin.units.destroy', $unit->id) . '"
+                                                method="post" id="unit-' . $unit->id . '">
+                                            <input type="hidden" name="_token" value="' . csrf_token() . '">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                    </form>';
             $data[] = $nestedData;
         }
 

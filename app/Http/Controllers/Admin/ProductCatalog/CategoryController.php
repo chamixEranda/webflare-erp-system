@@ -61,10 +61,13 @@ class CategoryController extends Controller
             $nestedData['parent_id'] = $category->parentCategory ? $category->parentCategory->name : 'N/A';
             $nestedData['slug'] = $category->slug ? $category->slug : 'N/A';
             $nestedData['action'] = '<button type="button" class="btn btn-sm btn-primary" onclick="editProductCategory(' . $category->id . ')">Edit</button> 
-                                    <form action="' . route('admin.categories.destroy', $category->id) . '" method="POST" style="display:inline;">
-                                        ' . csrf_field() . '
-                                        ' . method_field('DELETE') . '
-                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm(\'Are you sure?\')">Delete</button>
+                                    <button class="btn btn-sm btn-danger" type="button" onclick="form_alert(\'category-' . $category->id . '\',\'Want to delete this category ?\')" title="Delete Category"><i class="tio-delete-outlined"></i>
+                                        Delete
+                                    </button>
+                                    <form action="' . route('admin.categories.destroy', $category->id) . '"
+                                                method="post" id="category-' . $category->id . '">
+                                            <input type="hidden" name="_token" value="' . csrf_token() . '">
+                                            <input type="hidden" name="_method" value="DELETE">
                                     </form>';
             $data[] = $nestedData;
         }
