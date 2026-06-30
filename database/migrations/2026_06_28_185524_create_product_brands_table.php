@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -26,6 +27,9 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('product_brands', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
         Schema::dropIfExists('product_brands');
     }
 };

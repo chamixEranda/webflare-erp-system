@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('conversion_factor', 18, 8)->default(1);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -29,6 +30,9 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('units', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
         Schema::dropIfExists('units');
     }
 };
