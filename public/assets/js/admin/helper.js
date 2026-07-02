@@ -23,3 +23,8 @@ function form_alert(formId, message) {
         return result.isConfirmed;
     });
 }
+
+$('#logout-link').on('click', function(e) {
+    e.preventDefault();
+    $('#logout-form').submit();
+});

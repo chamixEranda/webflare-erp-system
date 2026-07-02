@@ -51,6 +51,7 @@
   @include('admin.layouts.footer')
 
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="{{ asset('assets/js/plugins/apexcharts.min.js') }}"></script>
   <script src="{{ asset('assets/js/pages/dashboard-default.js') }}"></script>
   <script src="{{ asset('assets/js/admin/helper.js') }}"></script>
@@ -61,7 +62,6 @@
   <script src="{{ asset('assets/js/fonts/custom-font.js') }}"></script>
   <script src="{{ asset('assets/js/pcoded.js') }}"></script>
   <script src="{{ asset('assets/js/plugins/feather.min.js') }}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="{{ asset('assets/js/plugins/jquery.dataTables.min.js') }}"></script>
   <script src="{{ asset('assets/js/plugins/dataTables.bootstrap5.min.js') }}"></script>
   <script src="{{ asset('assets/js/plugins/buttons.colVis.min.js') }}"></script>
