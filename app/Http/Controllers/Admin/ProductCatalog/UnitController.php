@@ -56,22 +56,26 @@ class UnitController extends Controller
         $data = [];
 
         foreach ($units as $key => $unit) {
-            $nestedData['key'] = $key + 1;
+            $nestedData['key'] = str_pad($start + $key + 1, 2, '0', STR_PAD_LEFT);
             $nestedData['id'] = $unit->id;
             $nestedData['name'] = $unit->name;
             $nestedData['short_name'] = $unit->short_name ? $unit->short_name : 'N/A';
             $nestedData['uom_type'] = UomType::getUomTypeName($unit->uom_type);
             $nestedData['base_unit_id'] = $unit->baseUnit ? $unit->baseUnit->name : 'N/A';
             $nestedData['conversion_factor'] = $unit->conversion_factor;
-            $nestedData['action'] = '<button type="button" class="btn btn-sm btn-primary" onclick="editUnit('.$unit->id.')">Edit</button>
-                                    <button class="btn btn-sm btn-danger" type="button" onclick="form_alert(\'unit-' . $unit->id . '\',\'Want to delete this unit ?\')" title="Delete Unit"><i class="tio-delete-outlined"></i>
-                                        Delete
+            $nestedData['action'] = '<div class="d-flex align-items-center gap-2 justify-content-center">
+                                    <button type="button" class="btn btn-icon btn-sm rounded-2" style="background:rgba(var(--bs-primary-rgb),0.1); color:var(--bs-primary); border:none;" onclick="editUnit('.$unit->id.')" title="Edit Unit">
+                                        <i class="ti ti-edit" style="font-size:1rem;"></i>
                                     </button>
-                                    <form action="' . route('admin.units.destroy', $unit->id) . '"
-                                                method="post" id="unit-' . $unit->id . '">
-                                            <input type="hidden" name="_token" value="' . csrf_token() . '">
-                                            <input type="hidden" name="_method" value="DELETE">
-                                    </form>';
+                                    <button class="btn btn-icon btn-sm rounded-2" style="background:rgba(var(--bs-danger-rgb),0.1); color:var(--bs-danger); border:none;" type="button" onclick="form_alert(\'unit-'.$unit->id.'\',\'Want to delete this unit ?\')" title="Delete Unit">
+                                        <i class="ti ti-trash" style="font-size:1rem;"></i>
+                                    </button>
+                                    <form action="'.route('admin.units.destroy', $unit->id).'"
+                                                 method="post" id="unit-'.$unit->id.'">
+                                             <input type="hidden" name="_token" value="'.csrf_token().'">
+                                             <input type="hidden" name="_method" value="DELETE">
+                                     </form>
+                                     </div>';
             $data[] = $nestedData;
         }
 

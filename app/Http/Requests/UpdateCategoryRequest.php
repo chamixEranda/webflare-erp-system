@@ -23,11 +23,11 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'          => 'required|string|max:255',
-            'slug'          => 'nullable|string|max:255',
-            'parent_id'     => 'nullable|exists:categories,id',
-            'description'   => 'nullable|string',
-            'image'         => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'name' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255|unique:product_categories,slug,'.$this->route('category'),
+            'parent_id' => 'nullable|exists:product_categories,id',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 }

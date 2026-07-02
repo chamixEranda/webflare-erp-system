@@ -1,11 +1,22 @@
 $(document).ready(function() {
-    $('#units-table').DataTable({
-        dom: 'Bfrtip',
+    const table = $('#units-table').DataTable({
+        dom: 'Brtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],
         processing: true,
         serverSide: true,
+        language: {
+            info: "Showing _START_–_END_ of _TOTAL_ units",
+            infoEmpty: "Showing 0–0 of 0 units",
+            infoFiltered: "(filtered from _MAX_ total units)",
+            zeroRecords: "No units found",
+            emptyTable: "No units found",
+            paginate: {
+                previous: "‹",
+                next: "›"
+            }
+        },
         ajax: {
             url: '/admin/product-catalog/units/list',
             type: 'POST',
@@ -21,30 +32,45 @@ $(document).ready(function() {
             { data: 'uom_type' },
             { data: 'base_unit_id' },
             { data: 'conversion_factor' },
-            { data: 'action', orderable: false, searchable: false }
+            { data: 'action', orderable: false, searchable: false, className: 'text-center' }
         ],
         order:[['1', 'asc']],
         columnDefs: [
             {
                 "orderable": false,
                 'targets': [0]
-            },
-            {
-                'render': function(data, type, row, meta){
-                    if(type === 'display'){
-                        data = '<div class="checkbox"><input type="checkbox" class="dt-checkboxes"><label></label></div>';
-                    }
-
-                   return data;
-                },
-                'checkboxes': {
-                   'selectRow': true,
-                   'selectAllRender': '<div class="checkbox"><input type="checkbox" class="dt-checkboxes"><label></label></div>'
-                },
-                'targets': [0]
             }
         ],
     });
+
+    // Custom inline controls integration
+    const searchInput = document.getElementById('userTableSearch');
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            table.search(this.value).draw();
+        });
+    }
+
+    const perPageSelect = document.getElementById('userTablePerPage');
+    if (perPageSelect) {
+        perPageSelect.addEventListener('change', function() {
+            table.page.len(parseInt(this.value, 10)).draw();
+        });
+    }
+
+    // Export button triggers
+    $('#exportCsvBtn').on('click', function() {
+        table.button('.buttons-csv').trigger();
+    });
+    $('#exportExcelBtn').on('click', function() {
+        table.button('.buttons-excel').trigger();
+    });
+    $('#exportPdfBtn').on('click', function() {
+        table.button('.buttons-pdf').trigger();
+    });
+
+    // Add custom class to pagination row for styling
+    $('#units-table').closest('.dataTables_wrapper').find('.dataTables_info').closest('.row').addClass('custom-pagination-row');
 });
 
 // Initialize SlimSelects with afterChange events (SlimSelect v4 uses afterChange, not onChange)
