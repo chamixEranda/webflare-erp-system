@@ -157,18 +157,17 @@
                     <i class="ti ti-user"></i>
                     <span>View Profile</span>
                   </a>
-                  <a href="#!" class="dropdown-item">
-                    <i class="ti ti-clipboard-list"></i>
-                    <span>Social Profile</span>
-                  </a>
-                  <a href="#!" class="dropdown-item">
-                    <i class="ti ti-wallet"></i>
-                    <span>Billing</span>
-                  </a>
-                  <a href="#!" class="dropdown-item">
+                  <a href="javascript:void(0);" class="dropdown-item" id="logout-link">
                     <i class="ti ti-power"></i>
                     <span>Logout</span>
                   </a>
+                  <form method="POST" action="{{ route('admin.auth.logout') }}" style="display: none;" id="logout-form">
+                    @csrf
+                    <button type="submit" class="dropdown-item" style="background: none; border: none; padding: 0; width: 100%; text-align: left;">
+                      <i class="ti ti-power"></i>
+                      <span>Logout</span>
+                    </button>
+                  </form>
                 </div>
                 <div class="tab-pane fade" id="drp-tab-2" role="tabpanel" aria-labelledby="drp-t2" tabindex="0">
                   <a href="#!" class="dropdown-item">
