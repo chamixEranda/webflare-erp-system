@@ -36,6 +36,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::resource('categories', CategoryController::class);
             Route::post('categories/list', [CategoryController::class, 'list'])->name('categories.list');
             Route::resource('brands', BrandController::class);
+            Route::post('brands/list', [BrandController::class, 'list'])->name('brands.list');
             Route::get('units/base-units', [UnitController::class, 'baseUnits'])->name('units.baseUnits');
             Route::resource('units', UnitController::class);
             Route::post('units/list', [UnitController::class, 'list'])->name('units.list');
